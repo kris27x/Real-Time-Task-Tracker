@@ -9,6 +9,15 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
+  // Simulate user registration
+  register(username: string, password: string): boolean {
+    // This is a mock implementation. Replace with a real registration API call.
+    if (username && password) {
+      return true;
+    }
+    return false;
+  }
+
   // Simulate login and store the token in localStorage
   login(username: string, password: string): boolean {
     // This is a mock implementation. Replace with a real authentication API call.

@@ -54,4 +54,10 @@ export class TaskService {
       return of(result as T);
     };
   }
+
+  // Get task
+  getTask(id: number): Observable<Task> {
+    return this.http.get<Task>(`${this.apiUrl}/${id}`);
+  }
+  
 }
