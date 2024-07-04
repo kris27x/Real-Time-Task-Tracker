@@ -1,0 +1,67 @@
+// Styles for the task-list component
+.task-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+  
+    mat-card {
+      width: 100%;
+      max-width: 800px;
+    }
+  
+    mat-card-title {
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+  
+      th.mat-header-cell, td.mat-cell {
+        text-align: left;
+        padding: 16px;
+      }
+  
+      th.mat-header-cell {
+        background-color: #f5f5f5;
+        font-weight: 600;
+      }
+  
+      td.mat-cell {
+        background-color: #ffffff;
+      }
+  
+      tr.mat-header-row, tr.mat-row {
+        transition: background-color 0.3s ease;
+      }
+  
+      tr.mat-row:hover {
+        background-color: #f1f1f1;
+      }
+  
+      .mat-column-actions {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+  
+        button {
+          min-width: 64px;
+        }
+      }
+    }
+  
+    .mat-elevation-z8 {
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
+    }
+  }
+  
