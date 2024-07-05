@@ -1,27 +1,13 @@
 /* Global styles for the Angular application */
 
-/* Import Angular Material theming styles */
-@import '@angular/material/core/theming';
-
-/* Define custom themes for Angular Material */
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-pink, A200, A100, A400);
-$warn: mat-palette($mat-red);
-
-/* Define a light theme using the custom palettes */
-$theme: mat-light-theme(
-  (
-    color: (
-      primary: $primary,
-      accent: $accent,
-      warn: $warn,
-    ),
-    typography: mat-typography-config(),
-  )
-);
-
-/* Apply the custom theme to the application */
-@include angular-material-theme($theme);
+/* Define custom color palettes */
+$primary-color: #3f51b5; /* Indigo */
+$primary-light-color: #c5cae9;
+$primary-dark-color: #303f9f;
+$accent-color: #e91e63; /* Pink */
+$accent-light-color: #f8bbd0;
+$accent-dark-color: #c2185b;
+$warn-color: #f44336; /* Red */
 
 /* General global styles */
 html, body {
@@ -35,8 +21,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: mat-color($primary, 50); /* Light background color from the primary palette */
-  color: mat-color($primary, 900); /* Dark text color from the primary palette */
+  background-color: $primary-light-color; /* Light background color from the primary palette */
+  color: $primary-dark-color; /* Dark text color from the primary palette */
 }
 
 main {
@@ -50,6 +36,8 @@ main {
 
 /* Custom styles for Angular Material toolbar */
 .mat-toolbar {
+  background-color: $primary-color;
+  color: white;
   position: sticky;
   top: 0;
   z-index: 1000; /* Ensure toolbar stays above other content */
@@ -64,7 +52,7 @@ main {
 }
 
 /* Card class for consistent appearance of cards */
-.card {
+.mat-card {
   width: 100%;
   margin-bottom: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
@@ -73,6 +61,18 @@ main {
 /* Button class for consistent spacing of material buttons */
 .mat-button {
   margin: 8px;
+  background-color: $primary-color;
+  color: white;
+}
+
+/* Styles for form field appearance */
+.mat-form-field {
+  width: 100%;
+}
+
+/* Error message styles */
+.mat-error {
+  color: $warn-color;
 }
 
 /* Responsive styles for smaller screens */
@@ -80,7 +80,7 @@ main {
   .container {
     padding: 8px;
   }
-  .card {
+  .mat-card {
     margin-bottom: 8px;
   }
 }

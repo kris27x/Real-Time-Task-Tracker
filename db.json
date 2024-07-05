@@ -6,6 +6,17 @@
     { "id": 4, "name": "Design Homepage", "description": "Create the design for the homepage including layout and styles." },
     { "id": 5, "name": "Implement Authentication", "description": "Add authentication functionality to secure the application." },
     { "id": 6, "name": "Write Unit Tests", "description": "Write unit tests for all components and services." },
-    { "id": 7, "name": "Deploy Application", "description": "Deploy the application to the server." }
+    { "id": 7, "name": "Deploy Application", "description": "Deploy the application to the server." },
+    { "id": 8, "name": "Create Registration Page", "description": "Develop the registration page for new users." },
+    { "id": 9, "name": "Optimize Performance", "description": "Optimize the application's performance for faster load times." },
+    { "id": 10, "name": "Fix Bugs", "description": "Identify and fix bugs reported by users." },
+    { "id": 11, "name": "Add Error Handling", "description": "Implement error handling for API calls and UI interactions." },
+    { "id": 12, "name": "Create About Page", "description": "Develop the about page with information about the application." },
+    { "id": 13, "name": "Add Logging", "description": "Implement logging to track application events and errors." },
+    { "id": 14, "name": "Set up CI/CD", "description": "Set up continuous integration and continuous deployment pipelines." },
+    { "id": 15, "name": "Improve Accessibility", "description": "Ensure the application is accessible to users with disabilities." }
+  ],
+  "users": [
+    { "id": 1, "username": "user", "password": "password" }
   ]
 }

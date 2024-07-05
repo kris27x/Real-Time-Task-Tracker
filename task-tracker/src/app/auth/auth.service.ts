@@ -1,13 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly tokenKey = 'authToken';
+  private readonly tokenKey = 'authToken';  // Key to store the token in localStorage
+  private isBrowser: boolean;  // Flag to check if the platform is a browser
 
-  constructor(private router: Router) {}
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private router: Router) {
+    this.isBrowser = isPlatformBrowser(platformId);  // Determine if the current platform is a browser
+  }
 
   /**
    * Initialize the service
@@ -41,9 +45,9 @@ export class AuthService {
    * @returns boolean - Login success status
    */
   login(username: string, password: string): boolean {
-    if (username === 'user' && password === 'password') {
-      const token = 'fake-jwt-token';
-      localStorage.setItem(this.tokenKey, token);
+    if (username === 'user' && password === 'password' && this.isBrowser) {
+      const token = 'fake-jwt-token';  // Mock token
+      localStorage.setItem(this.tokenKey, token);  // Store token in localStorage
       return true;
     }
     return false;
@@ -53,9 +57,11 @@ export class AuthService {
    * Simulate logout and remove the token from localStorage
    */
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
+    if (this.isBrowser) {
+      localStorage.removeItem(this.tokenKey);  // Remove token from localStorage
+    }
     this.router.navigate(['/login']).catch(error => {
-      console.error('Navigation error:', error); // Log any navigation errors
+      console.error('Navigation error:', error);  // Log any navigation errors
     });
   }
 
@@ -64,7 +70,7 @@ export class AuthService {
    * @returns boolean - User's login status
    */
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.tokenKey);
+    return this.isBrowser && !!localStorage.getItem(this.tokenKey);  // Check token in localStorage if in browser
   }
 
   /**
@@ -72,6 +78,6 @@ export class AuthService {
    * @returns string | null - The stored token or null if not found
    */
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return this.isBrowser ? localStorage.getItem(this.tokenKey) : null;  // Get token from localStorage if in browser
   }
 }

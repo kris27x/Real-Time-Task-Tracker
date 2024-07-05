@@ -44,6 +44,6 @@ export const appConfig: ApplicationConfig = {
 
     // Application services and guards for authentication and route protection
     AuthService,
-    AuthGuard, provideAnimationsAsync(), provideAnimationsAsync(),
+    AuthGuard, provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(),
   ],
 };
