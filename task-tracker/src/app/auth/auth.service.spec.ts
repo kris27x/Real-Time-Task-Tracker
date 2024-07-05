@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { PLATFORM_ID } from '@angular/core';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -12,7 +13,8 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthService,
-        { provide: Router, useValue: routerSpy }
+        { provide: Router, useValue: routerSpy },
+        { provide: PLATFORM_ID, useValue: 'browser' } // Mock PLATFORM_ID as 'browser'
       ]
     });
 
@@ -39,10 +41,14 @@ describe('AuthService', () => {
   });
 
   describe('#logout', () => {
-    it('should remove the token and navigate to login', () => {
+    it('should remove the token and navigate to login', (done) => {
+      localStorage.setItem('authToken', 'fake-jwt-token'); // Ensure token is set before logout
       service.logout();
       expect(localStorage.getItem('authToken')).toBeNull();
-      expect(router.navigate).toHaveBeenCalledWith(['/login']);
+      setTimeout(() => {
+        expect(router.navigate).toHaveBeenCalledWith(['/login']);
+        done();
+      }, 0); // Wait for the next macrotask to check the assertions
     });
   });
 

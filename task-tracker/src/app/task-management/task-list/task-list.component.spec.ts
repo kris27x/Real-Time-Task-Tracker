@@ -6,7 +6,7 @@ import { Task } from '../task.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TaskListComponent', () => {
   let component: TaskListComponent;
@@ -21,12 +21,12 @@ describe('TaskListComponent', () => {
   beforeEach(async () => {
     const spy = jasmine.createSpyObj('TaskService', ['getTasks', 'deleteTask']);
     await TestBed.configureTestingModule({
-      declarations: [TaskListComponent],
       imports: [
+        TaskListComponent,
         MatCardModule,
         MatTableModule,
         MatButtonModule,
-        BrowserAnimationsModule
+        NoopAnimationsModule // Use NoopAnimationsModule to disable animations for testing
       ],
       providers: [
         { provide: TaskService, useValue: spy }

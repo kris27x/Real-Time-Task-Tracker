@@ -21,21 +21,20 @@ describe('RegisterComponent', () => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
-      declarations: [RegisterComponent],
       imports: [
         ReactiveFormsModule,
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        NoopAnimationsModule // Use NoopAnimationsModule to disable animations for testing
+        NoopAnimationsModule,
+        RegisterComponent // Import the standalone component correctly
       ],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
         { provide: Router, useValue: routerSpy }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
@@ -91,7 +90,7 @@ describe('RegisterComponent', () => {
     component.registerForm.markAllAsTouched();
     fixture.detectChanges();
 
-    const mismatchError = fixture.debugElement.query(By.css('mat-error')).nativeElement;
+    const mismatchError = fixture.debugElement.queryAll(By.css('mat-error'))[2].nativeElement;
 
     expect(mismatchError.textContent).toContain('Passwords do not match');
   });

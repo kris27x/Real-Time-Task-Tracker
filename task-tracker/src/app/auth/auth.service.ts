@@ -60,7 +60,9 @@ export class AuthService {
     if (this.isBrowser) {
       localStorage.removeItem(this.tokenKey);  // Remove token from localStorage
     }
-    this.router.navigate(['/login']).catch(error => {
+    this.router.navigate(['/login']).then(() => {
+      console.log('Navigated to login page'); // Optional: Log successful navigation
+    }).catch(error => {
       console.error('Navigation error:', error);  // Log any navigation errors
     });
   }

@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Task } from '../task.model';
 
 describe('TaskFormComponent', () => {
@@ -23,20 +23,22 @@ describe('TaskFormComponent', () => {
   beforeEach(async () => {
     const taskServiceSpy = jasmine.createSpyObj('TaskService', ['getTask', 'addTask', 'updateTask']);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['paramMap'], {
-      paramMap: of({ get: () => '1' })
-    });
+    const activatedRouteSpy = {
+      paramMap: of({
+        get: () => '1'
+      })
+    };
 
     await TestBed.configureTestingModule({
-      declarations: [TaskFormComponent],
       imports: [
+        TaskFormComponent,
         ReactiveFormsModule,
         FormsModule,
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        BrowserAnimationsModule
+        NoopAnimationsModule // Use NoopAnimationsModule to disable animations for testing
       ],
       providers: [
         { provide: TaskService, useValue: taskServiceSpy },

@@ -13,7 +13,7 @@ describe('AppComponent', () => {
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
-        AppComponent
+        AppComponent // Ensure AppComponent is included as an import for standalone component
       ],
     }).compileComponents();
   });
