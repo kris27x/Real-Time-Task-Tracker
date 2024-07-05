@@ -50,6 +50,8 @@ export class AuthService {
       localStorage.setItem(this.tokenKey, token);  // Store token in localStorage
       return true;
     }
+    // Ensure token is cleared for invalid login attempts
+    localStorage.removeItem(this.tokenKey);
     return false;
   }
 
