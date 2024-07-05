@@ -90,9 +90,9 @@ describe('RegisterComponent', () => {
     component.registerForm.markAllAsTouched();
     fixture.detectChanges();
 
-    const mismatchError = fixture.debugElement.queryAll(By.css('mat-error'))[2].nativeElement;
+    const mismatchError = fixture.debugElement.queryAll(By.css('mat-error'))[2];
 
-    expect(mismatchError.textContent).toContain('Passwords do not match');
+    expect(mismatchError.nativeElement.textContent).toContain('Passwords do not match');
   });
 
   it('should call AuthService register method on form submit with valid data', () => {

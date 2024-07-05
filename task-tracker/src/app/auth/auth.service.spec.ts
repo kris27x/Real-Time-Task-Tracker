@@ -43,9 +43,12 @@ describe('AuthService', () => {
   describe('#logout', () => {
     it('should remove the token and navigate to login', (done) => {
       localStorage.setItem('authToken', 'fake-jwt-token'); // Ensure token is set before logout
+      router.navigate.and.returnValue(Promise.resolve(true)); // Mock navigate to return a resolved promise
+
       service.logout();
-      expect(localStorage.getItem('authToken')).toBeNull();
+
       setTimeout(() => {
+        expect(localStorage.getItem('authToken')).toBeNull();
         expect(router.navigate).toHaveBeenCalledWith(['/login']);
         done();
       }, 0); // Wait for the next macrotask to check the assertions
