@@ -1,4 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles for the Angular application */
 
+/* Import Angular Material theming styles */
+@import '@angular/material/core/theming';
+
+/* Define custom themes for Angular Material */
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+/* Define a light theme using the custom palettes */
+$theme: mat-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+    typography: mat-typography-config(),
+  )
+);
+
+/* Apply the custom theme to the application */
+@include angular-material-theme($theme);
+
+/* General global styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: mat-color($primary, 50); /* Light background color from the primary palette */
+  color: mat-color($primary, 900); /* Dark text color from the primary palette */
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom styles for Angular Material toolbar */
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure toolbar stays above other content */
+}
+
+/* Container class for consistent padding and width */
+.container {
+  padding: 16px;
+  width: 100%;
+  max-width: 1200px; /* Maximum width for large screens */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Card class for consistent appearance of cards */
+.card {
+  width: 100%;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+}
+
+/* Button class for consistent spacing of material buttons */
+.mat-button {
+  margin: 8px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+  .container {
+    padding: 8px;
+  }
+  .card {
+    margin-bottom: 8px;
+  }
+}
+
+/* Redundant global styles */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

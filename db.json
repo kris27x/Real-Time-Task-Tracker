@@ -1,6 +1,11 @@
 {
-    "tasks": [
-      { "id": 1, "name": "Sample Task", "description": "This is a sample task." }
-    ]
-  }
-  
+  "tasks": [
+    { "id": 1, "name": "Sample Task", "description": "This is a sample task." },
+    { "id": 2, "name": "Create Login Page", "description": "Develop the login page for the application." },
+    { "id": 3, "name": "Set up Database", "description": "Set up the initial database structure and sample data." },
+    { "id": 4, "name": "Design Homepage", "description": "Create the design for the homepage including layout and styles." },
+    { "id": 5, "name": "Implement Authentication", "description": "Add authentication functionality to secure the application." },
+    { "id": 6, "name": "Write Unit Tests", "description": "Write unit tests for all components and services." },
+    { "id": 7, "name": "Deploy Application", "description": "Deploy the application to the server." }
+  ]
+}

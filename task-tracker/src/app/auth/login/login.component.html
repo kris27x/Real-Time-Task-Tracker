@@ -2,29 +2,36 @@
   <mat-card>
     <mat-card-title>Login</mat-card-title>
     <mat-card-content>
+      <!-- Reactive form binding -->
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Username field with validation -->
         <mat-form-field appearance="fill">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" />
-          <mat-error *ngIf="loginForm.get('username').hasError('required')">
+          <!-- Error message for username validation -->
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
             Username is required
           </mat-error>
         </mat-form-field>
 
+        <!-- Password field with validation -->
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="password" />
-          <mat-error *ngIf="loginForm.get('password').hasError('required')">
+          <!-- Error message for password validation -->
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
             Password is required
           </mat-error>
         </mat-form-field>
 
+        <!-- Submit button -->
         <div class="form-actions">
           <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
             Login
           </button>
         </div>
       </form>
+      <!-- Display login error message if any -->
       <div *ngIf="loginError" class="error-message">
         {{ loginError }}
       </div>
