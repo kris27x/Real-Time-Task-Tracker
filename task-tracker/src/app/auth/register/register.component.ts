@@ -53,7 +53,11 @@ export class RegisterComponent {
   passwordMatchValidator(form: AbstractControl): ValidationErrors | null {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { mismatch: true };
+    if (password !== confirmPassword) {
+      form.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { mismatch: true };
+    }
+    return null;
   }
 
   /**
