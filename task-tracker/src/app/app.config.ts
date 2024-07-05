@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, RouterModule } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +19,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // Main application configuration for Angular
 export const appConfig: ApplicationConfig = {
@@ -40,10 +39,9 @@ export const appConfig: ApplicationConfig = {
 
     // Router setup with defined routes
     provideRouter(appRoutes),
-    RouterModule,
 
     // Application services and guards for authentication and route protection
     AuthService,
-    AuthGuard, provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(),
+    AuthGuard,
   ],
 };

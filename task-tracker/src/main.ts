@@ -10,7 +10,9 @@ if (environment.production) {
 }
 
 /**
- * Bootstrap the Angular application with the specified configuration
+ * Bootstrap the Angular application with the specified configuration.
+ * This function will initialize the Angular application with the 
+ * root component and the application configuration.
  */
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => {

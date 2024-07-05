@@ -28,16 +28,20 @@ export class TaskListComponent implements OnInit {
   tasks$: Observable<Task[]> = of([]);  // Initialize with an empty observable
   displayedColumns: string[] = ['name', 'description', 'actions'];
   dataSource = new MatTableDataSource<Task>();  // Initialize MatTableDataSource
-  loading = false;
+  loading = false;  // Loading indicator
 
   constructor(private taskService: TaskService, private snackBar: MatSnackBar) {}
 
+  /**
+   * Lifecycle hook that is called after data-bound properties are initialized.
+   * Initiates the task loading process.
+   */
   ngOnInit(): void {
     this.loadTasks();
   }
 
   /**
-   * Loads the list of tasks and handles loading state and errors.
+   * Loads the list of tasks from the server and handles loading state and errors.
    */
   loadTasks(): void {
     this.loading = true;
@@ -55,7 +59,7 @@ export class TaskListComponent implements OnInit {
   }
 
   /**
-   * Deletes a task and reloads the task list.
+   * Deletes a task from the server and reloads the task list.
    * @param id - The ID of the task to delete.
    */
   deleteTask(id: number): void {
