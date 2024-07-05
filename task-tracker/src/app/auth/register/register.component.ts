@@ -56,6 +56,12 @@ export class RegisterComponent {
     if (password !== confirmPassword) {
       form.get('confirmPassword')?.setErrors({ mismatch: true });
       return { mismatch: true };
+    } else {
+      // Clear the mismatch error if passwords match
+      if (form.get('confirmPassword')?.hasError('mismatch')) {
+        delete form.get('confirmPassword')?.errors?.['mismatch'];
+        form.get('confirmPassword')?.updateValueAndValidity({ onlySelf: true });
+      }
     }
     return null;
   }

@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';  // Import HttpClientModule and provideHttpClient
 
 import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-management/task-list/task-list.component';
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule, // Add HttpClientModule
 
     // Angular Material modules for UI components
     MatCardModule,
@@ -39,6 +41,7 @@ export const appConfig: ApplicationConfig = {
 
     // Router setup with defined routes
     provideRouter(appRoutes),
+    provideHttpClient(), // Provide HttpClient for making HTTP requests
 
     // Application services and guards for authentication and route protection
     AuthService,

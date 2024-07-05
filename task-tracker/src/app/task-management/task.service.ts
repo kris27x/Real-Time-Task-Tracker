@@ -8,7 +8,7 @@ import { Task } from './task.model';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:3000/tasks';
+  private apiUrl = 'http://localhost:3000/tasks'; // URL to web API
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -83,8 +83,9 @@ export class TaskService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(`${operation} failed: ${error.message}`);
+      console.error(`${operation} failed: ${error.message}`); // Log to console instead
       // TODO: send the error to remote logging infrastructure
+      // Return an empty result so the app keeps running
       return of(result as T);
     };
   }
