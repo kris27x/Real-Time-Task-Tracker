@@ -26,7 +26,7 @@
         <div class="p-field p-grid">
           <label for="password" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Password</label>
           <div class="p-col-12 p-md-10">
-            <input id="password" pPassword formControlName="password" class="form-control" />
+            <input id="password" pPassword formControlName="password" class="form-control" type="password" />
             <!-- Error messages for password field -->
             <small *ngIf="registerForm.get('password')?.hasError('required')" class="p-error">
               Password is required
@@ -41,7 +41,7 @@
         <div class="p-field p-grid">
           <label for="confirmPassword" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Confirm Password</label>
           <div class="p-col-12 p-md-10">
-            <input id="confirmPassword" pPassword formControlName="confirmPassword" class="form-control" />
+            <input id="confirmPassword" pPassword formControlName="confirmPassword" class="form-control" type="password" />
             <!-- Error messages for confirm password field -->
             <small *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="p-error">
               Confirm Password is required
