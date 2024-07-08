@@ -1,19 +1,17 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';  // Import HttpClientModule and provideHttpClient
+import { provideHttpClient } from '@angular/common/http'; // Import provideHttpClient
 
-import { AppComponent } from './app.component';
-import { TaskListComponent } from './task-management/task-list/task-list.component';
-import { TaskFormComponent } from './task-management/task-form/task-form.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth.guard';
-import { appRoutes } from './app.routes';
+// PrimeNG modules
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
+import { MessageService, ConfirmationService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
+// Angular Material modules for UI components
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,29 +19,47 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-// Main application configuration for Angular
+// Application components, services, and routes
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+import { appRoutes } from './app.routes';
+
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export const appConfig: ApplicationConfig = {
   providers: [
-    // Core Angular modules
-    BrowserModule,
+    // Angular core providers
+    provideHttpClient(),
+
+    // Reactive forms and other modules
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule, // Add HttpClientModule
 
-    // Angular Material modules for UI components
+    // Angular Material modules
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    MatSnackBarModule,  // Module for snack bar notifications
+    MatSnackBarModule,
+
+    // PrimeNG modules
+    InputTextModule,
+    ButtonModule,
+    CardModule,
+    ToastModule,
+    ConfirmDialogModule, // Add ConfirmDialogModule for confirmation dialogs
+
+    // PrimeNG services
+    MessageService, // Provide MessageService for notifications
+    ConfirmationService, // Provide ConfirmationService for dialogs
+    PrimeNGConfig, // Provide PrimeNGConfig for global configuration
 
     // Router setup with defined routes
     provideRouter(appRoutes),
-    provideHttpClient(), // Provide HttpClient for making HTTP requests
 
-    // Application services and guards for authentication and route protection
+    // Application services and guards
     AuthService,
     AuthGuard,
   ],

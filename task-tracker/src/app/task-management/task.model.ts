@@ -41,4 +41,14 @@ export interface Task {
    * Optional property for the last updated date of the task.
    */
   updatedDate?: Date;
+
+  /**
+   * Optional property indicating the tags associated with the task.
+   */
+  tags?: string[];
+
+  /**
+   * Optional property for additional notes or comments about the task.
+   */
+  notes?: string;
 }

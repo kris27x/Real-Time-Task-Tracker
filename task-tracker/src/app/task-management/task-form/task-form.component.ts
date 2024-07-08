@@ -12,6 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
+// PrimeNG modules
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-task-form',
   standalone: true,
@@ -22,8 +29,13 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    InputTextModule,
+    ButtonModule,
+    CardModule,
+    ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
 })
@@ -37,7 +49,8 @@ export class TaskFormComponent implements OnInit {
     private taskService: TaskService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar // Inject MatSnackBar for notifications
+    private snackBar: MatSnackBar, // Inject MatSnackBar for notifications
+    private messageService: MessageService
   ) {}
 
   /**
@@ -105,24 +118,18 @@ export class TaskFormComponent implements OnInit {
   }
 
   /**
-   * Shows a success notification using Angular Material Snackbar.
+   * Shows a success notification using PrimeNG Toast.
    * @param message - The success message to display.
    */
   private showSuccess(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: ['success-snackbar']
-    });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 
   /**
-   * Shows an error notification using Angular Material Snackbar.
+   * Shows an error notification using PrimeNG Toast.
    * @param message - The error message to display.
    */
   private showError(message: string): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: ['error-snackbar']
-    });
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 }

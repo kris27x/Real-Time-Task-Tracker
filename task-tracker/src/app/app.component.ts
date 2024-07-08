@@ -5,6 +5,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { PrimeNGConfig } from 'primeng/api';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -19,21 +21,31 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fadeAnimation', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'task-tracker';
 
-  constructor() {
-    // Constructor for potential future dependencies
-  }
+  /**
+   * Constructor for AppComponent
+   * @param primengConfig - PrimeNGConfig for configuring PrimeNG components
+   */
+  constructor(private primengConfig: PrimeNGConfig) {}
 
   /**
    * Lifecycle hook that is called after data-bound properties are initialized.
    * Use this hook to perform any additional initialization.
    */
   ngOnInit(): void {
-    // Initialization logic can go here
+    this.primengConfig.ripple = true; // Enable ripple effect for PrimeNG components
   }
 
   /**
@@ -42,5 +54,14 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     // Cleanup logic can go here
+  }
+
+  /**
+   * Prepare route for animation
+   * @param outlet - The router outlet to prepare
+   * @returns The animation data for the route or null
+   */
+  prepareRoute(outlet: RouterOutlet): string | null {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'] ? outlet.activatedRouteData['animation'] : null;
   }
 }

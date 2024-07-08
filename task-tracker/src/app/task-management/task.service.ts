@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Task } from './task.model';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class TaskService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private messageService: MessageService) {}
 
   /**
    * Fetches all tasks from the server.
@@ -84,9 +85,18 @@ export class TaskService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`); // Log to console instead
+      this.showError(`${operation} failed: ${error.message}`);
       // TODO: send the error to remote logging infrastructure
       // Return an empty result so the app keeps running
       return of(result as T);
     };
+  }
+
+  /**
+   * Shows an error notification using PrimeNG Toast.
+   * @param message - The error message to display.
+   */
+  private showError(message: string): void {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 }

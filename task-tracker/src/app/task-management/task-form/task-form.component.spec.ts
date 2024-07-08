@@ -38,7 +38,7 @@ describe('TaskFormComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        NoopAnimationsModule // Use NoopAnimationsModule to disable animations for testing
+        NoopAnimationsModule
       ],
       providers: [
         { provide: TaskService, useValue: taskServiceSpy },

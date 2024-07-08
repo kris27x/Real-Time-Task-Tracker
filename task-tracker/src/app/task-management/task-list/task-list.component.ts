@@ -4,33 +4,38 @@ import { Task } from '../task.model';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   imports: [
     CommonModule,
-    MatCardModule,
-    MatTableModule,
-    MatButtonModule,
     RouterModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    TableModule,
+    ButtonModule,
+    CardModule
   ],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent implements OnInit {
   tasks$: Observable<Task[]> = of([]);  // Initialize with an empty observable
-  displayedColumns: string[] = ['name', 'description', 'actions'];
-  dataSource = new MatTableDataSource<Task>();  // Initialize MatTableDataSource
+  dataSource: Task[] = [];  // Initialize data source
   loading = false;  // Loading indicator
 
-  constructor(private taskService: TaskService, private snackBar: MatSnackBar) {}
+  constructor(
+    private taskService: TaskService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+  ) {}
 
   /**
    * Lifecycle hook that is called after data-bound properties are initialized.
@@ -54,7 +59,7 @@ export class TaskListComponent implements OnInit {
     );
 
     this.tasks$.subscribe(tasks => {
-      this.dataSource.data = tasks;  // Assign data to the data source
+      this.dataSource = tasks;  // Assign data to the data source
     });
   }
 
@@ -70,8 +75,20 @@ export class TaskListComponent implements OnInit {
           return of();  // Return an empty observable in case of error
         }),
         finalize(() => this.loadTasks())  // Reload tasks after deletion
-      ).subscribe();
+      ).subscribe(() => {
+        this.showSuccess('Task deleted successfully');
+      });
     }
+  }
+
+  /**
+   * Displays a success message using Angular Material Snackbar.
+   * @param message - The success message to display.
+   */
+  private showSuccess(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+    });
   }
 
   /**

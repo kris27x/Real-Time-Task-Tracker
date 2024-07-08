@@ -1,36 +1,40 @@
-<div class="task-form">
-  <mat-card>
-    <mat-card-title>{{ isEditMode ? 'Edit Task' : 'Add Task' }}</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+<div>
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="text-center">
+        <h2 class="text-xl font-semibold">{{ isEditMode ? 'Edit Task' : 'Add Task' }}</h2>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <!-- Task Name Field -->
-        <mat-form-field appearance="fill">
-          <mat-label>Task Name</mat-label>
-          <input matInput formControlName="name">
-          <mat-error *ngIf="taskForm.get('name')?.hasError('required')">
-            Task name is required
-          </mat-error>
-        </mat-form-field>
+        <div class="p-field p-grid">
+          <label for="taskName" class="p-col-12 p-md-2">Task Name</label>
+          <div class="p-col-12 p-md-10">
+            <input id="taskName" type="text" pInputText formControlName="name" class="task-input" />
+            <small *ngIf="taskForm.get('name')?.hasError('required')" class="p-error">
+              Task name is required
+            </small>
+          </div>
+        </div>
 
         <!-- Task Description Field -->
-        <mat-form-field appearance="fill">
-          <mat-label>Task Description</mat-label>
-          <textarea matInput formControlName="description"></textarea>
-          <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
-            Task description is required
-          </mat-error>
-        </mat-form-field>
+        <div class="p-field p-grid">
+          <label for="taskDescription" class="p-col-12 p-md-2">Task Description</label>
+          <div class="p-col-12 p-md-10">
+            <textarea id="taskDescription" pInputTextarea formControlName="description" rows="5" class="task-input"></textarea>
+            <small *ngIf="taskForm.get('description')?.hasError('required')" class="p-error">
+              Task description is required
+            </small>
+          </div>
+        </div>
 
         <!-- Form Actions -->
-        <div class="form-actions">
-          <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
-            {{ isEditMode ? 'Update Task' : 'Add Task' }}
-          </button>
-          <button mat-raised-button color="accent" type="button" (click)="onCancel()">
-            Cancel
-          </button>
+        <div class="form-actions text-center mt-4">
+          <button pButton type="submit" label="{{ isEditMode ? 'Update Task' : 'Add Task' }}" icon="pi pi-check" class="p-button-primary" [disabled]="taskForm.invalid"></button>
+          <button pButton type="button" label="Cancel" icon="pi pi-times" class="p-button-secondary ml-2" (click)="onCancel()"></button>
         </div>
       </form>
-    </mat-card-content>
-  </mat-card>
+    </ng-template>
+  </p-card>
 </div>

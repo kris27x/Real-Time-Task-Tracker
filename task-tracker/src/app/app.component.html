@@ -1,14 +1,40 @@
-<mat-toolbar color="primary">
-  <span>{{ title }}</span>
-  <span class="spacer"></span>
-  <button mat-button [routerLink]="['/tasks']">Tasks</button>
-  <button mat-button [routerLink]="['/add-task']">Add Task</button>
-  <button mat-button [routerLink]="['/login']">Login</button>
-  <button mat-button [routerLink]="['/register']">Register</button>
-</mat-toolbar>
+<!-- app.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="">
+      <i class="pi pi-check-square mr-2"></i>{{ title }}
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/tasks']" routerLinkActive="active">Tasks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/add-task']" routerLinkActive="active">Add Task</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<main class="main-content">
+<!-- Main Content Area -->
+<main class="container my-5">
   <router-outlet></router-outlet>
 </main>
-
-<router-outlet />

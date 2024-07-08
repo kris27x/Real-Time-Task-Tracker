@@ -22,13 +22,13 @@ describe('LoginComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [
-        LoginComponent,  // Import the standalone component
+        LoginComponent,
         ReactiveFormsModule,
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        NoopAnimationsModule // Use NoopAnimationsModule to disable animations for testing
+        NoopAnimationsModule
       ],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
@@ -63,11 +63,13 @@ describe('LoginComponent', () => {
     component.loginForm.markAllAsTouched();
     fixture.detectChanges();
 
-    const usernameError = fixture.debugElement.query(By.css('mat-error')).nativeElement;
-    const passwordError = fixture.debugElement.queryAll(By.css('mat-error'))[1].nativeElement;
+    const usernameError = fixture.debugElement.query(By.css('small.p-error'));
+    const passwordError = fixture.debugElement.queryAll(By.css('small.p-error'))[1];
 
-    expect(usernameError.textContent).toContain('Username is required');
-    expect(passwordError.textContent).toContain('Password is required');
+    expect(usernameError).toBeTruthy();
+    expect(usernameError.nativeElement.textContent).toContain('Username is required');
+    expect(passwordError).toBeTruthy();
+    expect(passwordError.nativeElement.textContent).toContain('Password is required');
   });
 
   it('should call AuthService login method on form submit with valid data', () => {

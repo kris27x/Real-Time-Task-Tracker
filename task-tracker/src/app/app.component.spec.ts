@@ -30,18 +30,18 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('task-tracker');
   });
 
-  it('should render title in the toolbar', () => {
+  it('should render title in the navbar', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('mat-toolbar span')?.textContent).toContain('task-tracker');
+    expect(compiled.querySelector('.navbar-brand')?.textContent).toContain('task-tracker');
   });
 
   it('should have navigation buttons', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const navButtons = compiled.querySelectorAll('button');
+    const navButtons = compiled.querySelectorAll('.nav-link');
     expect(navButtons.length).toBe(4);
     expect(navButtons[0].textContent).toContain('Tasks');
     expect(navButtons[1].textContent).toContain('Add Task');

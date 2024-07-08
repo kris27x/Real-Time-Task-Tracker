@@ -1,40 +1,45 @@
-<div class="login-container">
-  <mat-card>
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
-      <!-- Reactive form binding -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div>
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="text-center">
+        <h2 class="text-xl font-semibold">Login</h2>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <!-- Username field with validation -->
-        <mat-form-field appearance="fill">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" />
-          <!-- Error message for username validation -->
-          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-            Username is required
-          </mat-error>
-        </mat-form-field>
+        <div class="p-field p-grid">
+          <label for="username" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Username</label>
+          <div class="p-col-12 p-md-10">
+            <input id="username" pInputText formControlName="username" />
+            <!-- Error message for username validation -->
+            <small *ngIf="loginForm.get('username')?.hasError('required')" class="p-error">
+              Username is required
+            </small>
+          </div>
+        </div>
 
         <!-- Password field with validation -->
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" />
-          <!-- Error message for password validation -->
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-            Password is required
-          </mat-error>
-        </mat-form-field>
+        <div class="p-field p-grid">
+          <label for="password" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Password</label>
+          <div class="p-col-12 p-md-10">
+            <input id="password" pInputText type="password" formControlName="password" />
+            <!-- Error message for password validation -->
+            <small *ngIf="loginForm.get('password')?.hasError('required')" class="p-error">
+              Password is required
+            </small>
+          </div>
+        </div>
 
         <!-- Submit button -->
-        <div class="form-actions">
-          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-            Login
-          </button>
+        <div class="form-actions text-center mt-4">
+          <button pButton type="submit" label="Login" icon="pi pi-sign-in" class="p-button-primary" [disabled]="loginForm.invalid"></button>
         </div>
       </form>
       <!-- Display login error message if any -->
-      <div *ngIf="loginError" class="error-message">
+      <div *ngIf="loginError" class="error-message text-center mt-4 text-red-500">
         {{ loginError }}
       </div>
-    </mat-card-content>
-  </mat-card>
+    </ng-template>
+  </p-card>
 </div>

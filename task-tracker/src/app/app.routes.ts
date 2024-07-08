@@ -7,10 +7,10 @@ import { AuthGuard } from './auth/auth.guard';
 
 // Define the application routes
 export const appRoutes: Routes = [
-  // Redirect root path to the tasks list
+  // Redirect root path to the login page
   { 
     path: '', 
-    redirectTo: '/tasks', 
+    redirectTo: '/login', 
     pathMatch: 'full' 
   },
 
@@ -18,38 +18,58 @@ export const appRoutes: Routes = [
   { 
     path: 'tasks', 
     component: TaskListComponent, 
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { 
+      title: 'Task List',
+      animation: 'TaskListPage'
+    }
   },
 
   // Route for adding a new task, guarded by authentication
   { 
     path: 'add-task', 
     component: TaskFormComponent, 
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { 
+      title: 'Add Task',
+      animation: 'AddTaskPage'
+    }
   },
 
   // Route for editing an existing task, guarded by authentication
   { 
     path: 'edit-task/:id', 
     component: TaskFormComponent, 
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard],
+    data: { 
+      title: 'Edit Task',
+      animation: 'EditTaskPage'
+    }
   },
 
   // Route for the login page
   { 
     path: 'login', 
-    component: LoginComponent 
+    component: LoginComponent,
+    data: { 
+      title: 'Login',
+      animation: 'LoginPage'
+    }
   },
 
   // Route for the registration page
   { 
     path: 'register', 
-    component: RegisterComponent 
+    component: RegisterComponent,
+    data: { 
+      title: 'Register',
+      animation: 'RegisterPage'
+    }
   },
 
-  // Wildcard route to handle any undefined routes, redirecting to the tasks list
+  // Wildcard route to handle any undefined routes, redirecting to the login page
   { 
     path: '**', 
-    redirectTo: '/tasks' 
+    redirectTo: '/login' 
   }
 ];

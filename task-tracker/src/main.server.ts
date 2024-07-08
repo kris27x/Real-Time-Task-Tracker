@@ -13,10 +13,11 @@ if (environment.production) {
  * Bootstrap the Angular application with the specified server configuration
  * @returns A promise that resolves to the ApplicationRef instance or an error
  */
-const bootstrap = (): Promise<ApplicationRef> => bootstrapApplication(AppComponent, config)
-  .catch((err) => {
-    console.error('Error bootstrapping the server application:', err);
-    throw err;  // Re-throw the error to propagate it correctly
-  });
+const bootstrap = (): Promise<ApplicationRef> => 
+  bootstrapApplication(AppComponent, config)
+    .catch((err) => {
+      console.error('Error bootstrapping the server application:', err);
+      throw err;  // Re-throw the error to propagate it correctly
+    });
 
 export default bootstrap;

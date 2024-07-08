@@ -28,7 +28,7 @@ describe('RegisterComponent', () => {
         MatInputModule,
         MatButtonModule,
         NoopAnimationsModule,
-        RegisterComponent // Import the standalone component correctly
+        RegisterComponent
       ],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
@@ -64,13 +64,16 @@ describe('RegisterComponent', () => {
     component.registerForm.markAllAsTouched();
     fixture.detectChanges();
 
-    const usernameError = fixture.debugElement.query(By.css('mat-error')).nativeElement;
-    const passwordError = fixture.debugElement.queryAll(By.css('mat-error'))[1].nativeElement;
-    const confirmPasswordError = fixture.debugElement.queryAll(By.css('mat-error'))[2].nativeElement;
+    const usernameError = fixture.debugElement.query(By.css('small.p-error'));
+    const passwordError = fixture.debugElement.queryAll(By.css('small.p-error'))[1];
+    const confirmPasswordError = fixture.debugElement.queryAll(By.css('small.p-error'))[2];
 
-    expect(usernameError.textContent).toContain('Username is required');
-    expect(passwordError.textContent).toContain('Password is required');
-    expect(confirmPasswordError.textContent).toContain('Confirm Password is required');
+    expect(usernameError).toBeTruthy();
+    expect(usernameError.nativeElement.textContent).toContain('Username is required');
+    expect(passwordError).toBeTruthy();
+    expect(passwordError.nativeElement.textContent).toContain('Password is required');
+    expect(confirmPasswordError).toBeTruthy();
+    expect(confirmPasswordError.nativeElement.textContent).toContain('Confirm Password is required');
   });
 
   it('should display minlength validation errors when fields do not meet minlength', () => {
@@ -78,11 +81,13 @@ describe('RegisterComponent', () => {
     component.registerForm.markAllAsTouched();
     fixture.detectChanges();
 
-    const usernameError = fixture.debugElement.query(By.css('mat-error')).nativeElement;
-    const passwordError = fixture.debugElement.queryAll(By.css('mat-error'))[1].nativeElement;
+    const usernameError = fixture.debugElement.query(By.css('small.p-error'));
+    const passwordError = fixture.debugElement.queryAll(By.css('small.p-error'))[1];
 
-    expect(usernameError.textContent).toContain('Username must be at least 4 characters long');
-    expect(passwordError.textContent).toContain('Password must be at least 6 characters long');
+    expect(usernameError).toBeTruthy();
+    expect(usernameError.nativeElement.textContent).toContain('Username must be at least 4 characters long');
+    expect(passwordError).toBeTruthy();
+    expect(passwordError.nativeElement.textContent).toContain('Password must be at least 6 characters long');
   });
 
   it('should display mismatch error when passwords do not match', () => {
@@ -90,7 +95,7 @@ describe('RegisterComponent', () => {
     component.registerForm.markAllAsTouched();
     fixture.detectChanges();
 
-    const mismatchError = fixture.debugElement.queryAll(By.css('mat-error')).find(el => el.nativeElement.textContent.includes('Passwords do not match'));
+    const mismatchError = fixture.debugElement.queryAll(By.css('small.p-error')).find(el => el.nativeElement.textContent.includes('Passwords do not match'));
 
     expect(mismatchError).toBeTruthy();
   });

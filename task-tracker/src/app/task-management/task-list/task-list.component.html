@@ -1,34 +1,37 @@
-<div class="task-list">
-  <mat-card>
-    <mat-card-title>Task List</mat-card-title>
-    <mat-card-content>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        
-        <!-- Task Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let task"> {{ task.name }} </td>
-        </ng-container>
-
-        <!-- Task Description Column -->
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let task"> {{ task.description }} </td>
-        </ng-container>
-
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let task">
-            <button mat-button color="warn" (click)="deleteTask(task.id)">Delete</button>
-            <button mat-button color="primary" [routerLink]="['/edit-task', task.id]">Edit</button>
-          </td>
-        </ng-container>
-
-        <!-- Header and Row Declarations -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </mat-card-content>
-  </mat-card>
+<div>
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5></h5>
+        <h2>Task List</h2>
+        <button pButton type="button" label="Add Task" icon="pi pi-plus" class="p-button-success" routerLink="/add-task"></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <p-table [value]="dataSource" class="p-datatable-sm p-datatable-striped" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-task>
+          <tr>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td class="text-center">
+              <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info p-mr-2" [routerLink]="['/edit-task', task.id]"></button>
+              <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteTask(task.id)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="3">No tasks found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-template>
+  </p-card>
 </div>

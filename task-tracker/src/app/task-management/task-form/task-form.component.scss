@@ -1,50 +1,76 @@
 .task-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-  
-    mat-card {
-      width: 100%;
-      max-width: 600px;
-      margin: 20px 0;
-  
-      mat-card-title {
-        font-size: 24px;
-        font-weight: 500;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-  
-      mat-card-content {
-        display: flex;
-        flex-direction: column;
-  
-        mat-form-field {
-          width: 100%;
-          margin-bottom: 16px;
-  
-          input, textarea {
-            width: 100%;
-          }
-  
-          mat-error {
-            font-size: 12px;
-            color: red;
-          }
-        }
-  
-        .form-actions {
-          display: flex;
-          justify-content: flex-end;
-          margin-top: 20px;
-  
-          button {
-            margin-left: 10px;
-          }
-        }
-      }
-    }
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.p-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.p-card-header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.p-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.p-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.task-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.task-input:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.p-error {
+  font-size: 12px;
+  color: red;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-actions button {
+  min-width: 120px;
+  margin-left: 10px;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}

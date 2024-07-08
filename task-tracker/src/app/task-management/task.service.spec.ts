@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TaskService } from './task.service';
+import { MessageService } from 'primeng/api';
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -8,7 +9,7 @@ describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [TaskService]
+      providers: [TaskService, MessageService] // Provide MessageService
     });
     service = TestBed.inject(TaskService);
   });

@@ -13,11 +13,15 @@ const serverConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: (authService: AuthService) => () => {
-        try {
-          authService.initialize();
-        } catch (error) {
-          console.error('Error initializing AuthService:', error);
-        }
+        return new Promise<void>((resolve, reject) => {
+          try {
+            authService.initialize();
+            resolve();
+          } catch (error) {
+            console.error('Error initializing AuthService:', error);
+            reject(error);
+          }
+        });
       },
       deps: [AuthService],
       multi: true,

@@ -7,11 +7,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { By } from '@angular/platform-browser';
 
 describe('TaskListComponent', () => {
   let component: TaskListComponent;
   let fixture: ComponentFixture<TaskListComponent>;
   let taskService: jasmine.SpyObj<TaskService>;
+  let confirmationService: jasmine.SpyObj<ConfirmationService>;
 
   const mockTasks: Task[] = [
     { id: 1, name: 'Test Task 1', description: 'Description 1' },
@@ -19,24 +24,30 @@ describe('TaskListComponent', () => {
   ];
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('TaskService', ['getTasks', 'deleteTask']);
+    const taskServiceSpy = jasmine.createSpyObj('TaskService', ['getTasks', 'deleteTask']);
+    const confirmationServiceSpy = jasmine.createSpyObj('ConfirmationService', ['confirm']);
+
     await TestBed.configureTestingModule({
       imports: [
-        TaskListComponent,
+        RouterTestingModule,
         MatCardModule,
         MatTableModule,
         MatButtonModule,
-        NoopAnimationsModule // Use NoopAnimationsModule to disable animations for testing
+        NoopAnimationsModule,
+        TaskListComponent
       ],
       providers: [
-        { provide: TaskService, useValue: spy }
+        { provide: TaskService, useValue: taskServiceSpy },
+        { provide: ConfirmationService, useValue: confirmationServiceSpy },
+        { provide: ActivatedRoute, useValue: { snapshot: { data: {} } } },
+        MessageService
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     taskService = TestBed.inject(TaskService) as jasmine.SpyObj<TaskService>;
+    confirmationService = TestBed.inject(ConfirmationService) as jasmine.SpyObj<ConfirmationService>;
     taskService.getTasks.and.returnValue(of(mockTasks));
-    taskService.deleteTask.and.returnValue(of(void 0));  // Return Observable<void>
+    taskService.deleteTask.and.returnValue(of(void 0)); // Return Observable<void>
 
     fixture = TestBed.createComponent(TaskListComponent);
     component = fixture.componentInstance;
@@ -59,7 +70,12 @@ describe('TaskListComponent', () => {
 
   it('should delete a task', () => {
     spyOn(component, 'loadTasks').and.callThrough();
-    component.deleteTask(1);
+
+    const deleteButton = fixture.debugElement.queryAll(By.css('.p-button-danger'))[0].nativeElement;
+    deleteButton.click();
+
+    fixture.detectChanges();
+
     expect(taskService.deleteTask).toHaveBeenCalledWith(1);
     expect(component.loadTasks).toHaveBeenCalled();
   });
